@@ -1,8 +1,10 @@
 const express =  require('express');  
 require('dotenv').config();
 const mongoose = require('mongoose'); 
-const bodyParser = require('body-parser')
+const movieRoute = require('./routes/movies');
+const pathMethod = require('./middleware/middleware')
 const UserRoutes = require('./routes/user')
+const bodyParser = require('body-parser')
 
 
 const app = express(); 
@@ -10,7 +12,6 @@ const app = express();
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
-
 
 
 mongoose.connect(process.env.Mongo_URI).then(()=>{
