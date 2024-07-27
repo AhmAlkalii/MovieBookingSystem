@@ -24,4 +24,4 @@ mongoose.connect(process.env.Mongo_URI).then(()=>{
 })
 
 app.use('/api/user', UserRoutes)
-
+app.use('/movies',movieRoute);
