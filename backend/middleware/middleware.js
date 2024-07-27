@@ -1,4 +1,5 @@
 
 export const pathMethod = (req,res) => {
-    console.log(`Path : ${req.path} --- Method : ${req.method}`)
+    console.log(`Path : ${req.path} --- Method : ${req.method}`); 
+    next();
 }
