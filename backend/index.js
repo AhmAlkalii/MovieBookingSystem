@@ -3,17 +3,28 @@ require('dotenv').config();
 const mongoose = require('mongoose'); 
 const movieRoute = require('./routes/movies');
 const pathMethod = require('./middleware/middleware')
-const app = express(); 
-app.use(express.json());  
+const UserRoutes = require('./routes/user')
+const ScheduleRoute = require('./routes/schedule')
 
-app.use('/movies',movieRoute);
+const bodyParser = require('body-parser')
+
+
+const app = express(); 
+
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: true}))
 
 
 mongoose.connect(process.env.Mongo_URI).then(()=>{
     app.listen(process.env.PORT,()=>{
-        console.log('running')
+        console.log(`Server is Listening on`, process.env.PORT, 'And Connect to MongoDB' )
     })
 }   
 ).catch((error)=>{
     console.log(error);
 })
+
+app.use('/api/user', UserRoutes)
+app.use('/movies',movieRoute);
+app.use('/api/schedule', ScheduleRoute)
