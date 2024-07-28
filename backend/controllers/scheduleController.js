@@ -16,14 +16,30 @@ const getRandomRoom = async() => {
     }
 }
 
-const createSchedule = async(movie_id, date, time) => {
+
+
+const createSchedule = async(movie_id, date, time,seatsBooked) => {
     try {
         const randomRoom = await getRandomRoom();
+        const availableSeats = randomRoom.available_seats;
+
+        const seatsExist = seatsBooked.every(seat =>
+            availableSeats.some(
+                availableSeat => availableSeat.row === seat.row && availableSeat.number === seat.number
+            )
+        );
+
+        if (!seatsExist) {
+            throw new Error('Some of the booked seats do not exist');
+        }
+
+
         const schedule = new Schedule({
             movie_id,
             room_id: randomRoom._id,
             date,
-            time
+            time,
+            seatsBooked
         });
 
         const savedSchedule = await schedule.save();
@@ -56,10 +72,10 @@ const singleSchedule =  async(req, res) => {
 
 
 const NewSchedule = async(req,res) => {
-    const {movie_id, date, time} = req.body
+    const {movie_id, date, time,seatsBooked} = req.body
 
     try {
-        const schedule = await createSchedule(movie_id, date, time);
+        const schedule = await createSchedule(movie_id, date, time,seatsBooked);
         res.status(201).json({ schedule });
     } catch (error) {
         res.status(500).json({ error: error.message });
