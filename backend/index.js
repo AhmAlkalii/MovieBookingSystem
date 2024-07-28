@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const movieRoute = require('./routes/movies');
 const pathMethod = require('./middleware/middleware')
 const UserRoutes = require('./routes/user')
+const ScheduleRoute = require('./routes/schedule')
+
 const bodyParser = require('body-parser')
 
 
@@ -25,3 +27,4 @@ mongoose.connect(process.env.Mongo_URI).then(()=>{
 
 app.use('/api/user', UserRoutes)
 app.use('/movies',movieRoute);
+app.use('/api/schedule', ScheduleRoute)
