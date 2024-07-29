@@ -4,8 +4,8 @@ const schema = mongoose.Schema;
 
 const ticketSchema = new schema({
     scheduleID: {
-        type : String, 
-        ref : 'schedule'
+        type: schema.Types.ObjectId,
+        ref: 'schedules'
     }, 
     seatNumber: {
         type : Number, 
@@ -17,4 +17,4 @@ const ticketSchema = new schema({
     }
 },{timestamps:true}); 
 
-module.exports = mongoose.model('tickets',ticketSchema);
+module.exports = mongoose.model('Tickets',ticketSchema);
