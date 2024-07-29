@@ -9,7 +9,7 @@ const movieSchema = new schema({
     }, 
     trailer : {
         type : String, 
-        require : true
+        // require : true
     }, 
     name : {
         type : String,
