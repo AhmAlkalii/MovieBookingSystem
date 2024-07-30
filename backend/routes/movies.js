@@ -45,7 +45,7 @@ const upload = multer({storage: storage}).fields([{name : 'trailer' , maxCount:1
 
 router.get('/', pathMethod, getAll);
 router.get('/:id', pathMethod, singleMovie);
-router.post('/create/', pathMethod,upload, create);
+router.post('/create', pathMethod,upload, create);
 router.delete('/remove/:id', pathMethod, remove);
 router.patch('/update/:id', pathMethod,upload, update);
 

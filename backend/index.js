@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const movieRoutes = require('./routes/movies');
 const ticketRoutes = require('./routes/tickets');
 const pathMethod = require('./middleware/middleware')
-
+const cors = require('cors')
 const UserRoutes = require('./routes/user')
 const ScheduleRoute = require('./routes/schedule')
 
@@ -13,7 +13,7 @@ const bodyParser = require('body-parser')
 
 const app = express(); 
 
-
+app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 

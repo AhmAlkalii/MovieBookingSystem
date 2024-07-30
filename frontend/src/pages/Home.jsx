@@ -14,7 +14,7 @@ const Home = () => {
           <p>Explore our extensive collection and discover the perfect movie for your next viewing experience. Enjoy your stay!</p>
         </div>
         <div className='newbutton'> 
-            <Button variant="outlined"><Link to='/schedule'>Check out Schedule</Link></Button>
+            <Button variant="outlined"><Link to='/movies'>Check out Movies</Link></Button>
         </div>
       </div>
       <footer className="footer">
