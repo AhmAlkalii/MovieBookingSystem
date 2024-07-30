@@ -9,7 +9,7 @@ const movieSchema = new schema({
     }, 
     trailer : {
         type : String, 
-        require : true
+        // require : true
     }, 
     name : {
         type : String,
@@ -21,4 +21,4 @@ const movieSchema = new schema({
     }
 },{timestamps : true}) 
 
-module.exports =  mongoose.model('movies',movieSchema ) ;
+module.exports =  mongoose.model('Movies',movieSchema ) ;
