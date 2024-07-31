@@ -11,6 +11,10 @@ const movieSchema = new schema({
         type : String, 
         // require : true
     }, 
+    price:{
+        type: String,
+        require: true
+    },
     name : {
         type : String,
         require : true

@@ -29,7 +29,7 @@ const singleMovie = async(req,res) => {
 const create = async(req,res) => {
     try{
         console.log(req.files)
-        const {trailer,name,description} = req.body; 
+        const {trailer,price, name,description} = req.body; 
         // const movie = await Movie.create({poster:req.file,trailer,name,description}); 
         // if(!movie){
         //     return res.json({error:'Failed to create movie'})

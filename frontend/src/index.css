@@ -17,6 +17,7 @@ body{
 }
 
 
+
 /* Navbar */
 .navbar {
   display: flex;
@@ -164,6 +165,7 @@ body{
 
 .movie-layer h4 {
   font-size: 23px;
+  color: aliceblue;
 }
 
 @media (max-width: 768px) {
@@ -186,4 +188,111 @@ body{
     font-size: 3rem;
     font-weight: bold; 
   }
+}
+
+
+/* Movie Details */
+
+.movie-container {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  align-items: center;
+  gap: 2.5rem;
+  margin: 50px;
+}
+
+.movie-container .movie-secbox {
+  position: relative;
+  border-radius: 2rem;
+  box-shadow: 0 0 1rem teal;
+  overflow: hidden;
+  display: flex;
+}
+
+.movie-secbox img {
+  width: 100%;
+  transition: transform 0.5s ease; 
+}
+
+.movie-secbox:hover img {
+  transform: scale(1.1);
+}
+
+.movie-secbox{
+  width: 240px;
+  height: 100%;
+}
+
+.arrow{
+  margin: 20px;
+  border: 2px solid black;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: #F8EDED; 
+  transition: background-color 0.3s, color 0.3s; 
+}
+
+.arrow:hover {
+  background-color: cadetblue; 
+  color: white; /
+}
+
+.details p{
+  margin: 9px 3px;
+}
+
+
+.actions {
+  display: flex;
+  justify-content: space-around;
+  align-items: center; 
+  margin-right: 54px;
+}
+
+.action-item {
+  text-align: center; 
+}
+
+.action-text {
+  display: block;
+}
+
+.actions :hover{
+  color: red;
+}
+
+
+
+
+/* Room */
+
+.room-box {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.room-icon{
+  margin: '1px';
+}
+
+.room-icon :hover{
+  color: red;
+}
+
+
+.pricebutton{
+  margin: 40px;
+  margin-left: 150px;
+  border: 2px solid black;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: #d63d3d; 
+  transition: background-color 0.3s, color 0.3s; 
+}
+
+.pricebutton:hover {
+  background-color: rgb(17, 105, 28); 
+  color: white; 
 }

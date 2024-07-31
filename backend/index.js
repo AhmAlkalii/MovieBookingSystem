@@ -4,10 +4,10 @@ const mongoose = require('mongoose');
 const movieRoutes = require('./routes/movies');
 const ticketRoutes = require('./routes/tickets');
 const pathMethod = require('./middleware/middleware')
-const cors = require('cors')
 const UserRoutes = require('./routes/user')
 const ScheduleRoute = require('./routes/schedule')
-
+const RoomRoutes = require('./routes/rooms')
+const cors = require('cors')
 const bodyParser = require('body-parser')
 
 
@@ -34,3 +34,4 @@ app.use('/api/user', UserRoutes);
 app.use('/api/schedule', ScheduleRoute);
 app.use('/movies',movieRoutes);
 app.use('/tickets',ticketRoutes);
+app.use('/rooms',RoomRoutes);

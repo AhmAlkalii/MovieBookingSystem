@@ -1,26 +1,32 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-import { Movies } from '../helper'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchMovies, getMoviesError, getMoviesStatus, selectAllMovies } from '../redux/movie'
+import { useNavigate } from 'react-router-dom'
 
 
 
 const Movie = () => {
-    const [movies, setMovies] = useState([])
+    const dispatch = useDispatch()
+    const movies = useSelector(selectAllMovies)
+    const movieStatus = useSelector(getMoviesStatus)
+    const error = useSelector(getMoviesError)
+    const navigate = useNavigate()
+
 
     useEffect(() => {
-        fetchMovies()
-    }, [])
-
-    const fetchMovies = async () => {
-        try {
-            const response = await axios.get('http://localhost:3001/movies');
-            setMovies(response.data)
-        } catch (error) {
-            console.log(error);
+        if( movieStatus === 'idle'){
+            dispatch(fetchMovies())
         }
-    }
-    
+    }, [movieStatus,dispatch])    
 
+
+    if (movieStatus === 'loading') {
+        return <div>Loading...</div>;
+    }
+
+    if (movieStatus === 'failed') {
+        return <div>Error: {error}</div>;
+    }
 
   return (
     <div className='Movie'>
@@ -29,14 +35,17 @@ const Movie = () => {
         </div>
         <div className='Movie-container'>
             {movies.map((movie) => (
-                <div className='movie-box' key={movie._id}>
+                <div className='movie-box' 
+                key={movie._id} 
+                onClick={() => navigate(`/movie/${movie._id}`,{
+                    state:{movie}
+                })}>
                     <img src={movie.poster} />
                     <div className='movie-layer'>
-                        <p className='title'>{movie.name}</p>
+                        <h4 className='title'>{movie.name}</h4>
                     </div>
                 </div>
             ))}
-
         </div>
 
     </div>
