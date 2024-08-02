@@ -16,8 +16,16 @@ const ScheduleSchema= ({
         type: Schema.Types.ObjectId,
         ref: 'Room'
     },
+    movie_name: {
+        type: String,
+        required: true
+    },
+    room_name: {
+        type: String,
+        required: true
+    },
     date : {
-        type: Date,
+        type: String,
         required: true
     },
     time: {

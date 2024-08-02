@@ -1,6 +1,6 @@
 import {BrowserRouter as Router, Routes ,Route} from 'react-router-dom'; 
 import Home from './pages/Home';
-import Ticket from './pages/Ticket';
+import Schedule from './pages/Schedule';
 import Login from './pages/LoginPage';
 import Navbar from './components/Navbar';
 import Movie from './pages/Movie';
@@ -18,7 +18,7 @@ function App() {
 
         <Routes>          
           <Route path='/' element={<Home/>} />
-          <Route path='/ticket' element={<Ticket/>}/>
+          <Route path='/schedule' element={<Schedule/>}/>
           <Route path='/movies' element={<Movie/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/movie/:id' element={<MovieDetails/>}/>

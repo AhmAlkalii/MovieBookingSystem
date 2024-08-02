@@ -4,16 +4,21 @@ import { fetchRoom, getRoomStatus, getRoomError, selectRoom } from '../redux/roo
 import EventSeatIcon from '@mui/icons-material/EventSeat';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { createSchedule } from '../redux/schedule';
+import {selectSelectedTime, selectSelectedDay, resetSelection } from '../redux/table'; 
+import SelectionTable from './Table';
 
 const Room = ({ movie }) => {
-    const { price } = movie;
+    const { _id, price, name } = movie;
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const room = useSelector(selectRoom);
     const roomStatus = useSelector(getRoomStatus);
     const error = useSelector(getRoomError);
 
-    const [selected, setSelected] = useState(0);
+    const selectedTime = useSelector(selectSelectedTime);
+    const selectedDay = useSelector(selectSelectedDay);
+    const [selectedSeats, setSelectedSeats] = useState([]);
     const [total, setTotal] = useState(price);
 
     useEffect(() => {
@@ -23,27 +28,48 @@ const Room = ({ movie }) => {
     }, [roomStatus, dispatch]);
 
     useEffect(() => {
-        setTotal(selected * price);
-    }, [selected, price]);
+        setTotal(selectedSeats.length * price); 
+    }, [selectedSeats, price]);
 
-    const handleSeatClick = () => {
-        setSelected(prevSelected => prevSelected + 1);
+    const handleSeatClick = (row, seatNumber) => {
+        setSelectedSeats(prevSeats => {
+            const seatIndex = prevSeats.findIndex(seat => seat.row === row && seat.number === seatNumber);
+
+            if (seatIndex > -1) {
+                return prevSeats.filter((_, index) => index !== seatIndex);
+            } else {
+                return [...prevSeats, { row, number: seatNumber }];
+            }
+        });
     };
 
     const handleBuyTicket = () => {
-        try {
-            if (selected > 0) {
-                
-                toast(`Ticket Purchased! Selected ${selected} seats`);
+        if (selectedSeats.length > 0 && selectedTime && selectedDay) {
+            const scheduleInfo = {
+                movie_id: _id,
+                movie_name: name,
+                room_name: room.name,
+                date: selectedDay,
+                time: selectedTime,
+                seatsBooked: selectedSeats
+            };
 
-                setSelected(0);
-                setTotal(price);
-                navigate('/')
-            } else {
-                toast.error("Please select at least one seat.");
-            }
-        } catch (error) {
-            toast.error("Failed to purchase ticket");
+            dispatch(createSchedule(scheduleInfo))
+                .unwrap()
+                .then(response => {
+                    console.log('Schedule created:', response);
+                    toast.success('Schedule created and tickets booked successfully!');
+                    setSelectedSeats([]);
+                    setTotal(price); 
+                    dispatch(resetSelection()); 
+                    navigate(`/schedule`)
+                })
+                .catch(error => {
+                    console.error('Error creating schedule:', error);
+                    toast.error('Failed to create schedule');
+                });
+        } else {
+            toast.error("Please select at least one seat, a time, and a day.");
         }
     };
 
@@ -66,12 +92,23 @@ const Room = ({ movie }) => {
             </div>
             <div className='room-box'>
                 {room.available_seats.map((seat, index) => (
-                    <div key={index} style={{ textAlign: 'center' }} className='room-icon' onClick={handleSeatClick}>
-                        <EventSeatIcon style={{ fontSize: 70 }} color="blue" />
+                    <div 
+                        key={index} 
+                        style={{ textAlign: 'center' }} 
+                        className='room-icon' 
+                        onClick={() => handleSeatClick(seat.row, seat.number)} 
+                    >
+                        <EventSeatIcon 
+                            style={{ fontSize: 70 }} 
+                            color={selectedSeats.some(s => s.row === seat.row && s.number === seat.number) ? "primary" : "inherit"} 
+                        />
                         <p>{`${seat.number}`}</p>
                     </div>
                 ))}
             </div>
+            
+            <SelectionTable/>
+
             <div>
                 <button className='pricebutton' onClick={handleBuyTicket}>
                     {total} Zloty
