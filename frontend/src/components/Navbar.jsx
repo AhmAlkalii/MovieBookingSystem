@@ -17,7 +17,7 @@ const Navbar = () => {
       
       <ul className='navlinks'>
         {/* <li><Link to='/ticket' title='Tickets'><ConfirmationNumberIcon/></Link></li> */}
-        <li><Link to='/schedule' title='Schedule'><EventNoteIcon/></Link></li>
+        <li><Link to='/schedule' title='Schedule'><ConfirmationNumberIcon/></Link></li>
         <li><Link to='/profile' title='Profile'><PortraitIcon/></Link></li>
         <li><Link to='/settings' title='Settings'><SettingsIcon/></Link></li>
       </ul>
