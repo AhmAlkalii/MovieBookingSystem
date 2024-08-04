@@ -1,18 +1,22 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSchedule, getScheduleError, getScheduleStatus, selectAllSchedule } from '../redux/schedule';
+import { useAuthContext } from '../hooks/useAuthContext'
+
+
 
 const Schedule = () => {
     const dispatch = useDispatch();
     const schedule = useSelector(selectAllSchedule);
     const scheduleStatus = useSelector(getScheduleStatus);
     const error = useSelector(getScheduleError);
+    const { user } = useAuthContext();
 
     useEffect(() => {
-        if (scheduleStatus === 'idle') {
-            dispatch(fetchSchedule());
+        if (user && scheduleStatus === 'idle') {
+            dispatch(fetchSchedule(user.token));
         }
-    }, [scheduleStatus, dispatch]);
+    }, [scheduleStatus, user , dispatch]);
 
     if (scheduleStatus === 'loading') {
         return <div>Loading...</div>;

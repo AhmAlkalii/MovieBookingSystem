@@ -32,6 +32,10 @@ const ScheduleSchema= ({
         type: String,
         required: true
     },
+    user_id : {
+        type: String,
+        required: true
+    },
     seatsBooked: [seatSchema]
 })
 

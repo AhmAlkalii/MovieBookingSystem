@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { createSchedule } from '../redux/schedule';
 import {selectSelectedTime, selectSelectedDay, resetSelection } from '../redux/table'; 
+import { useAuthContext } from '../hooks/useAuthContext'
 import SelectionTable from './Table';
 
 const Room = ({ movie }) => {
@@ -15,6 +16,7 @@ const Room = ({ movie }) => {
     const room = useSelector(selectRoom);
     const roomStatus = useSelector(getRoomStatus);
     const error = useSelector(getRoomError);
+    const { user } = useAuthContext();
 
     const selectedTime = useSelector(selectSelectedTime);
     const selectedDay = useSelector(selectSelectedDay);
@@ -53,25 +55,29 @@ const Room = ({ movie }) => {
                 time: selectedTime,
                 seatsBooked: selectedSeats
             };
-
-            dispatch(createSchedule(scheduleInfo))
-                .unwrap()
-                .then(response => {
-                    console.log('Schedule created:', response);
-                    toast.success('Schedule created and tickets booked successfully!');
-                    setSelectedSeats([]);
-                    setTotal(price); 
-                    dispatch(resetSelection()); 
-                    navigate(`/schedule`)
-                })
-                .catch(error => {
-                    console.error('Error creating schedule:', error);
-                    toast.error('Failed to create schedule');
-                });
+    
+            if (user && user.token) {
+                dispatch(createSchedule({ scheduleData: scheduleInfo, token: user.token }))
+                    .unwrap()
+                    .then(response => {
+                        console.log('Schedule created:', response);
+                        toast.success('Schedule created and tickets booked successfully!');
+                        setSelectedSeats([]);
+                        setTotal(price);
+                        dispatch(resetSelection());
+                        navigate(`/schedule`);
+                    })
+                    .catch(error => {
+                        console.error('Error creating schedule:', error);
+                        toast.error('Failed to create schedule');
+                    });
+            } else {
+                toast.error("User authentication is missing. Please log in.");
+            }
         } else {
             toast.error("Please select at least one seat, a time, and a day.");
         }
-    };
+    };    
 
     if (roomStatus === 'loading') {
         return <div>Loading...</div>;

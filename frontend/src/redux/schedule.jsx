@@ -6,16 +6,25 @@ const Schedule_URL = 'http://localhost:3001/api/schedule/';
 
 export const fetchSchedule = createAsyncThunk(
     'schedule/fetchSchedule',
-    async () => {
-        const response = await axios.get(Schedule_URL);
+    async (token) => {
+        const response = await axios.get(Schedule_URL, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
         return response.data;
     },
 );
 
 export const createSchedule = createAsyncThunk(
     'schedule/createSchedule',
-    async (scheduleData) => {
-        const response = await axios.post(PSchedule_URL, scheduleData);
+    async ({ scheduleData, token }) => {
+        const response = await axios.post(PSchedule_URL, scheduleData, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
         return response.data.schedule;
     }
 );
@@ -29,7 +38,11 @@ const initialState = {
 const scheduleSlice = createSlice({
     name: 'schedule',
     initialState,
-    reducers: {},
+    reducers: {
+        resetSchedule: (state) => {
+            state.schedule = [];
+        }
+    },
 
     extraReducers: (builder) => {
         builder
@@ -57,6 +70,8 @@ const scheduleSlice = createSlice({
             });
     },
 });
+
+export const {resetSchedule} = scheduleSlice.actions;
 
 export const selectAllSchedule = (state) => state.schedule.schedule;
 export const getScheduleStatus = (state) => state.schedule.status;

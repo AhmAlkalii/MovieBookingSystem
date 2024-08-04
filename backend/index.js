@@ -18,7 +18,11 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 
 
-
+app.use('/api/user', UserRoutes);
+app.use('/api/schedule', ScheduleRoute);
+app.use('/movies',movieRoutes);
+app.use('/tickets',ticketRoutes);
+app.use('/rooms',RoomRoutes);
 
 
 mongoose.connect(process.env.Mongo_URI).then(()=>{
@@ -30,8 +34,3 @@ mongoose.connect(process.env.Mongo_URI).then(()=>{
     console.log(error);
 })
 
-app.use('/api/user', UserRoutes);
-app.use('/api/schedule', ScheduleRoute);
-app.use('/movies',movieRoutes);
-app.use('/tickets',ticketRoutes);
-app.use('/rooms',RoomRoutes);

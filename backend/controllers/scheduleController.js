@@ -1,6 +1,7 @@
 const Room = require('../models/roomModel');
 const Schedule = require('../models/scheduleModel');
 
+
 // Helper functions
 const getRandomRoom = async () => {
     try {
@@ -16,7 +17,7 @@ const getRandomRoom = async () => {
     }
 };
 
-const createSchedule = async (movie_id, movie_name, room_name, date, time, seatsBooked) => {
+const createSchedule = async (movie_id, movie_name, room_name, date, time,user_id, seatsBooked) => {
     try {
         const randomRoom = await getRandomRoom();
         const availableSeats = randomRoom.available_seats;
@@ -43,6 +44,7 @@ const createSchedule = async (movie_id, movie_name, room_name, date, time, seats
             room_name,
             date,
             time,
+            user_id,
             seatsBooked
         });
 
@@ -56,8 +58,10 @@ const createSchedule = async (movie_id, movie_name, room_name, date, time, seats
 
 // Route functions
 const getSchedule = async (req, res) => {
+    const user_id = req.user._id;
+
     try {
-        const schedule = await Schedule.find({}).sort({ date: 1, time: 1 });
+        const schedule = await Schedule.find({ user_id }).sort({ date: -1, time: -1 });
         res.status(200).json(schedule);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -79,9 +83,9 @@ const singleSchedule = async (req, res) => {
 
 const NewSchedule = async (req, res) => {
     const { movie_id, movie_name, room_name, date, time, seatsBooked } = req.body;
-
+    const user_id = req.user._id;
     try {
-        const schedule = await createSchedule(movie_id, movie_name, room_name, date, time, seatsBooked);
+        const schedule = await createSchedule(movie_id, movie_name, room_name, date, time, user_id, seatsBooked);
         res.status(201).json({ schedule });
     } catch (error) {
         res.status(500).json({ error: error.message });
