@@ -35,7 +35,27 @@ const createSchedule = async (movie_id, movie_name, room_name, date, time, user_
             throw new Error('Some of the booked seats do not exist');
         }
 
-        const schedule = new Schedule({
+        // Find existing schedules for the same movie in the same room
+        const existingSchedules = await Schedule.find({
+            movie_id: movie_id,
+            room_id: room._id,
+            date: date,
+            time: time
+        });
+
+        // Check for seat conflicts
+        for (const schedule of existingSchedules) {
+            for (const seat of seatsBooked) {
+                const seatAlreadyBooked = schedule.seatsBooked.some(
+                    bookedSeat => bookedSeat.row === seat.row && bookedSeat.number === seat.number
+                );
+                if (seatAlreadyBooked) {
+                    throw new Error(`Seat ${seat.row}${seat.number} is already booked for this movie.`);
+                }
+            }
+        }
+
+        const newSchedule = new Schedule({
             movie_id,
             room_id: room._id,
             movie_name,
@@ -46,7 +66,7 @@ const createSchedule = async (movie_id, movie_name, room_name, date, time, user_
             seatsBooked
         });
 
-        const savedSchedule = await schedule.save();
+        const savedSchedule = await newSchedule.save();
         return savedSchedule;
     } catch (error) {
         console.error('Error creating schedule:', error);

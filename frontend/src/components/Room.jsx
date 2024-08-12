@@ -69,7 +69,7 @@ const Room = ({ movie }) => {
                     })
                     .catch(error => {
                         console.error('Error creating schedule:', error);
-                        toast.error('Failed to create schedule');
+                        toast.error('Please select a different seat');
                     });
             } else {
                 toast.error("User authentication is missing. Please log in.");
