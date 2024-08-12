@@ -9,6 +9,7 @@ router.get('/users', getUsers)
 router.get('/guests', getGuests)
 //single User
 router.get('/:id',singleUser)
+
 //Signup
 router.post('/signup', UserSignup)
 //FrequentUser Login

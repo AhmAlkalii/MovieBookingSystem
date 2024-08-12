@@ -10,6 +10,7 @@ import Room from './components/Room';
 import { useAuthContext } from './hooks/useAuthContext'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
+import Profile from './pages/Profile';
 
 function App() {
   const { user } = useAuthContext();
@@ -25,6 +26,7 @@ function App() {
           <Route path='/movies' element={<Movie/>}/>
           <Route path='/movie/:id' element={user ? <MovieDetails/> : <Navigate to='/Login'/>}/>
           <Route path='/room' element={<Room/>}/>
+          <Route path='/profile' element={user ? <Profile/> : <Navigate to='/Login'/>}/>
           <Route path='/Sign-Up' element={!user ? <Signup/> : <Navigate to='/'/> }/>
           <Route path='/Login' element={!user? <Login/> : <Navigate to='/'/>}/>
         </Routes>

@@ -16,11 +16,20 @@ const Schedule = () => {
         if (user && scheduleStatus === 'idle') {
             dispatch(fetchSchedule(user.token));
         }
+
+        const intervalId = setInterval(() => {
+            if (user) {
+                dispatch(fetchSchedule(user.token));
+            }
+        }, 1000);
+
+        return () => clearInterval(intervalId);
+        
     }, [scheduleStatus, user , dispatch]);
 
-    if (scheduleStatus === 'loading') {
-        return <div>Loading...</div>;
-    }
+    // if (scheduleStatus === 'loading') {
+    //     return <div>Loading...</div>;
+    // }
 
     if (scheduleStatus === 'failed') {
         return <div>Error: {error}</div>;

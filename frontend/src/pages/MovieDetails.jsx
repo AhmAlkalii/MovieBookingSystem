@@ -26,14 +26,14 @@ const MovieDetails = () => {
   const [sizes, setSizes] = useState(['42%', 'auto']);
 
   const layoutCSS = {
-    height: '180%',
+    height: '160%',
     display: 'flex',
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
   };
 
   const secondlayoutCSS = {
-    height: '180%',
+    height: '160%',
     display: 'flex',
     alignItems: 'flex-start',
     justifyContent: 'center',
@@ -46,7 +46,7 @@ const MovieDetails = () => {
   
 
   return (
-    <div style={{ height: '180vh', width: '100%' }}>
+    <div style={{ height: '160vh', width: '100%' }}>
       <SplitPane
         split='vertical'
         sizes={sizes}

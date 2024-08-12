@@ -1,32 +1,30 @@
 const Room = require('../models/roomModel');
 const Schedule = require('../models/scheduleModel');
 
-
-// Helper functions
-const getRandomRoom = async () => {
+const getRoom = async () => {
     try {
-        const rooms = await Room.find();
-        if (rooms.length === 0) {
-            throw new Error('No rooms available');
+        const room = await Room.findOne();
+        if (!room) {
+            throw new Error('No room found');
         }
-        const randomIndex = Math.floor(Math.random() * rooms.length);
-        return rooms[randomIndex];
+        return room;
     } catch (error) {
-        console.error('Error getting random room:', error);
+        console.error('Error getting room:', error);
         throw error;
     }
 };
 
-const createSchedule = async (movie_id, movie_name, room_name, date, time,user_id, seatsBooked) => {
+const createSchedule = async (movie_id, movie_name, room_name, date, time, user_id, seatsBooked) => {
     try {
-        const randomRoom = await getRandomRoom();
-        const availableSeats = randomRoom.available_seats;
+        const room = await getRoom();
+        const availableSeats = room.available_seats;
 
         // Ensure seatsBooked is an array
         if (!Array.isArray(seatsBooked)) {
             throw new Error('Invalid seatsBooked format');
         }
 
+        // Check if all booked seats exist in the available seats
         const seatsExist = seatsBooked.every(seat =>
             availableSeats.some(
                 availableSeat => availableSeat.row === seat.row && availableSeat.number === seat.number
@@ -39,7 +37,7 @@ const createSchedule = async (movie_id, movie_name, room_name, date, time,user_i
 
         const schedule = new Schedule({
             movie_id,
-            room_id: randomRoom._id,
+            room_id: room._id,
             movie_name,
             room_name,
             date,
