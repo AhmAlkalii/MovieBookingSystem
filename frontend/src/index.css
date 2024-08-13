@@ -80,7 +80,7 @@ button {
 
 .mylogo {
   max-width: 200px; 
-  margin-bottom: 20px; 
+  margin-top: 13px; 
 }
 
 .homeitems {
@@ -437,7 +437,7 @@ h1 span {
 }
 
 .time {
-  margin: .7em 0 0 1em;
+  margin: .7em 0 0 0em;
 }
 
 .seat, .time {
@@ -545,6 +545,28 @@ h1 span {
   box-shadow: 0 5px 10px rgba(0,0,0,0.2);
   margin: 30px;
 }
+.wrapperr{
+  position: relative;
+  max-width: 430px;
+  width: 100%;
+  background: #a2bec4;
+  padding: 34px;
+  border-radius: 6px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  margin: 30px;
+}
+.wrapperrr{
+  position: relative;
+  max-width: 430px;
+  width: 100%;
+  background: #a2bec4;
+  padding: 34px;
+  border-radius: 6px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  margin: 30px;
+}
+
+
 .wrapper h2{
   position: relative;
   font-size: 22px;
@@ -616,4 +638,40 @@ form .text h3 a{
 }
 form .text h3 a:hover{
   text-decoration: underline;
+}
+
+/* settings */
+.wrapper2{
+  position: relative;
+  max-width: 900px;
+  width: 100%;
+  background: #a2bec4;
+  padding: 34px;
+  border-radius: 6px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  margin: 30px;
+}
+
+.wrapper2 h2{
+  position: relative;
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+}
+.wrapper2 h2::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 28px;
+  border-radius: 12px;
+  background: #4070f4;
+}
+.wrapper2 form{
+  margin-top: 30px;
+}
+.wrapper2 form .input-box{
+  height: 52px;
+  margin: 18px 0;
 }

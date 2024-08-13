@@ -49,14 +49,11 @@ const Schedule = () => {
                             <h2>{s.movie_name}</h2>
                             <span>movie</span>
                         </div>
-                        <div className="name">
-                            <h2>{s.room_name}</h2>
-                            <span>room name</span>
-                        </div>
+                        
                         <div className="seat">
                             <h2>
                                 {s.seatsBooked.map((seat, index) => (
-                                    <span key={index}>{`Row: ${seat.row}, No: ${seat.number}; `}</span>
+                                    <h2 key={index}>{`Row: ${seat.row}, No: ${seat.number}; `}</h2>
                                 ))}
                             </h2>
                             <span>seat</span>

@@ -9,7 +9,6 @@ export const useLogout = () => {
 
     dispatch({ type: 'LOGOUT' })
     dispatch(resetSchedule());
-    window.location.reload();
   }
 
   return { logout }

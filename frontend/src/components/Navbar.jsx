@@ -35,7 +35,6 @@ const Navbar = () => {
             <Button variant="outlined" style={{color:"black"}}><span>{user.email}</span></Button>
           </li>
           <li><Link to='/schedule' title='Schedule'><ConfirmationNumberIcon/></Link></li>
-          <li><Link to='/profile' title='Profile'><PortraitIcon/></Link></li>
           <li><Link to='/settings' title='Settings'><SettingsIcon/></Link></li>
           <li><Link onClick={handleClick} title='Logout'><LogoutIcon/></Link></li>
       </ul>

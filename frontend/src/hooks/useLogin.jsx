@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useAuthContext } from './useAuthContext';
+import { toast } from 'react-toastify';
+
 
 export const useLogin = () => {
   const [error, setError] = useState(null);
@@ -19,6 +21,7 @@ export const useLogin = () => {
       localStorage.setItem('user', JSON.stringify(response.data));
 
       dispatch({ type: 'LOGIN', payload: response.data });
+      toast.success('Logged in Successfully')
 
     } catch (error) {
       if (error.response) {
