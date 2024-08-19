@@ -8,6 +8,7 @@ import { createSchedule } from '../redux/schedule';
 import {selectSelectedTime, selectSelectedDay, resetSelection } from '../redux/table'; 
 import { useAuthContext } from '../hooks/useAuthContext'
 import SelectionTable from './Table';
+import { PopupComp } from './Popup';
 
 const Room = ({ movie }) => {
     const { _id, price, name } = movie;
@@ -22,6 +23,8 @@ const Room = ({ movie }) => {
     const selectedDay = useSelector(selectSelectedDay);
     const [selectedSeats, setSelectedSeats] = useState([]);
     const [total, setTotal] = useState(price);
+    const [showPopup, setShowPopup] = useState(false);
+
 
     useEffect(() => {
         if (roomStatus === 'idle') {
@@ -32,6 +35,14 @@ const Room = ({ movie }) => {
     useEffect(() => {
         setTotal(selectedSeats.length * price); 
     }, [selectedSeats, price]);
+
+    useEffect(() => {
+        if (selectedSeats.length > 0 && selectedTime && selectedDay) {
+            setShowPopup(true); 
+        } else {
+            setShowPopup(false); 
+        }
+    }, [selectedSeats, selectedTime, selectedDay]);
 
     const handleSeatClick = (row, seatNumber) => {
         setSelectedSeats(prevSeats => {
@@ -116,9 +127,9 @@ const Room = ({ movie }) => {
             <SelectionTable/>
 
             <div>
-                <button className='pricebutton' onClick={handleBuyTicket}>
-                    {total} Zloty
-                </button>
+                {showPopup && (
+                    <PopupComp total={total} handleBuyTicket={handleBuyTicket} />
+                )}
             </div>
         </div>
     );

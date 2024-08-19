@@ -7,6 +7,7 @@ const pathMethod = require('./middleware/middleware')
 const UserRoutes = require('./routes/user')
 const ScheduleRoute = require('./routes/schedule')
 const RoomRoutes = require('./routes/rooms')
+const StripeRoutes = require('./routes/stripe')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 
@@ -23,6 +24,7 @@ app.use('/api/schedule', ScheduleRoute);
 app.use('/movies',movieRoutes);
 app.use('/tickets',ticketRoutes);
 app.use('/rooms',RoomRoutes);
+app.use('/stripe',StripeRoutes);
 
 
 mongoose.connect(process.env.Mongo_URI).then(()=>{
