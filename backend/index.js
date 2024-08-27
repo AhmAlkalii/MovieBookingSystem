@@ -10,7 +10,7 @@ const RoomRoutes = require('./routes/rooms')
 const StripeRoutes = require('./routes/stripe')
 const cors = require('cors')
 const bodyParser = require('body-parser')
-
+const path = require('path')
 
 const app = express(); 
 
@@ -26,6 +26,11 @@ app.use('/tickets',ticketRoutes);
 app.use('/rooms',RoomRoutes);
 app.use('/stripe',StripeRoutes);
 
+
+app.use(express.static("../frontend/build"))
+app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname,"frontend", "build", "index.html"))
+})
 
 mongoose.connect(process.env.Mongo_URI).then(()=>{
     app.listen(process.env.PORT,()=>{

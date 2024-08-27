@@ -33,7 +33,7 @@ const CheckoutForm = ({handleBuyTicket}) => {
 
 const handlePayment = async (tokenId) => {
     try {
-        const response = await axios.post('http://localhost:3001/stripe', {
+        const response = await axios.post('https://moviebookingsystem.azurewebsites.net/stripe', {
             token: tokenId,
         });
         if (response.data.success) {

@@ -1,13 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const Settings_URL = 'http://localhost:3001/api/schedule/create';
+const Settings_URL = 'https://moviebookingsystem.azurewebsites.net/api/schedule/create';
 
 
 export const updateSettings = createAsyncThunk(
     'settings/updateSettings',
     async ({ settingsInfo, id }) => {
-        const response = await axios.put(`http://localhost:3001/api/user/${id}`, settingsInfo);
+        const response = await axios.put(`https://moviebookingsystem.azurewebsites.net/api/user/${id}`, settingsInfo);
         return response.data;
     }
 );
@@ -15,7 +15,7 @@ export const updateSettings = createAsyncThunk(
 export const deleteUser = createAsyncThunk(
     'settings/deleteUser',
     async ({ id }) => {
-        const response = await axios.delete(`http://localhost:3001/api/user/${id}`);
+        const response = await axios.delete(`https://moviebookingsystem.azurewebsites.net/api/user/${id}`);
         return response.data;
     }
 )

@@ -14,7 +14,7 @@ export const useLogin = () => {
     setError(null);
 
     try {
-      const response = await axios.post('http://localhost:3001/api/user/login', {
+      const response = await axios.post('https://moviebookingsystem.azurewebsites.net/api/user/login', {
         email, password
       });
 

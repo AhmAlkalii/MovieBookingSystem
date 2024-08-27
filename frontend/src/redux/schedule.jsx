@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const PSchedule_URL = 'http://localhost:3001/api/schedule/create';
-const Schedule_URL = 'http://localhost:3001/api/schedule/';
+const PSchedule_URL = 'https://moviebookingsystem.azurewebsites.net/api/schedule/create';
+const Schedule_URL = 'https://moviebookingsystem.azurewebsites.net/api/schedule/';
 
 export const fetchSchedule = createAsyncThunk(
     'schedule/fetchSchedule',

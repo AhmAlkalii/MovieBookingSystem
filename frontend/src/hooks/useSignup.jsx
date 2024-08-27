@@ -13,7 +13,7 @@ export const useSignup = () => {
     setError(null);
 
     try {
-      const response = await axios.post('http://localhost:3001/api/user/signup', {
+      const response = await axios.post('https://moviebookingsystem.azurewebsites.net/api/user/signup', {
         firstname, lastname, number, email, password
       });
 
