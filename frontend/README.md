@@ -6,40 +6,52 @@ Welcome to the Movie Booking System, a fullstack application built using the MER
 
 ### User Flow
 
+
 1. **Home Page**: 
    - View an overview of the system and navigate to other pages.
-   - ![Home Page](path/to/homepage-image)
+   - ![Home Page](../frontend/src/assets/mbs/home.png)
 
 2. **Movies Page**: 
    - Browse all available movies.
-   - ![Movies Page](path/to/moviespage-image)
+   - ![Movies Page](../frontend/src/assets/mbs/movies.png)
 
 3. **Movie Details Page**: 
    - View detailed descriptions of each movie.
    - Watch the trailer of the movie.
    - Select seats and choose a date and time.
-   - ![Movie Details Page](path/to/moviedetailspage-image)
+   - ![Movie Details Page](../frontend/src/assets/mbs/details.png)
 
 4. **Booking and Payment**: 
    - Select seats for a specific movie.
    - Choose a day and time for the screening.
    - Complete payment using Stripe.
-   - ![Booking and Payment](path/to/bookingpayment-image)
+   - ![Booking and Payment](../frontend/src/assets/mbs/details2.png)
 
 5. **Schedule Page**: 
    - View your purchased tickets and any previous bookings.
-   - ![Schedule Page](path/to/schedulepage-image)
+   - ![Schedule Page](../frontend/src/assets/mbs/schedule.png)
 
 6. **Settings Page**: 
    - Update user data, change password, or delete your account.
-   - ![Settings Page](path/to/settingspage-image)
+   - ![Settings Page](../frontend/src/assets/mbs/settings.png)
+
+7. **Signup Page**:
+   - Register a new account by providing necessary details.
+   - ![Signup Page](../frontend/src/assets/mbs/singup.png)
+
+8. **Login Page**:
+   - Log in to your account using your credentials.
+   - ![Login Page](../frontend/src/assets/mbs/login.png)
+
 
 ### Navigation
 
 - **Navbar**:
   - When logged in: Navigate to Home, Settings, Ticket Page, and Logout.
+  - ![Navbar](../frontend/src/assets/mbs/navloggedin.png)
   - When not logged in: Navigate to Home, Signup, Login, and View Movies.
-  - ![Navbar](path/to/navbar-image)
+  - ![Navbar](../frontend/src/assets/mbs/navnotlogged.png)
+
 
 ### Authentication and Security
 
