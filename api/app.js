@@ -38,8 +38,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routes
-app.use('/', indexRouter);  // Serve EJS content for root
-app.use('/users', usersRouter); // Serve users resource
+app.use('/', indexRouter);  
+app.use('/users', usersRouter);
 
 app.use('/api/user', userRoutes);
 app.use('/api/schedule', scheduleRoute);

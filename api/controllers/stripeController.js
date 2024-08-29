@@ -6,7 +6,7 @@ const paymentProcessing = async (req, res) => {
         const { token } = req.body;
 
         const paymentIntent = await stripe.paymentIntents.create({
-            amount: 1000, // Amount in cents
+            amount: 1000,
             currency: 'usd',
             payment_method_data: {
                 type: 'card',
