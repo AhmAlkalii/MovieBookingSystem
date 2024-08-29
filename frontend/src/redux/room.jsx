@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 
-const Room_URL = 'https://moviebookingsystem.azurewebsites.net/rooms'
+const Room_URL = 'http://localhost:3001/rooms'
 
 
 

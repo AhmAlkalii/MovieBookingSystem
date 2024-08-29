@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "undefined/subscriptions/6ab28a55-bfd6-4ccb-a489-906d89336fd6/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/MovieBookingSystemm",
+    "appService.deploySubpath": "."
+}

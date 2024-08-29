@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const Movie_URL = 'https://moviebookingsystem.azurewebsites.net/movies';
+const Movie_URL = 'http://localhost:3001/movies';
 
 export const fetchMovies = createAsyncThunk(
   'movies/fetchMovies',
